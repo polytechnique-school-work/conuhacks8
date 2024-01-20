@@ -2,32 +2,38 @@
   <footer>
     <div class="about-us">
       About us
-      <div class="frontend">
-        Frontend
-        <div class="team">
-          <div>Gabriel Landry</div>
-          <div>Luckas Rakotondrafara</div>
+      <div class="wrapper">
+        <div class="frontend">
+          Frontend
+          <div class="team">
+            <div>Gabriel Landry</div>
+            <div>Luckas Rakotondrafara</div>
+          </div>
         </div>
-      </div>
-      <div class="backend">
-        Backend
-        <div class="team">
-          <div>Marc-Antoine Manningham</div>
-          <div>Gaëtan Florio</div>
+        <div class="backend">
+          Backend
+          <div class="team">
+            <div>Marc-Antoine Manningham</div>
+            <div>Gaëtan Florio</div>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="developped">
-      <div>Developped for ConuHacks VIII</div>
-      <div class="team">
-        <div class="github">
-          <div><GithubLogo /></div>
-          <div>GitHub</div>
+      Developped for ConuHacks VIII
+      <div class="wrapper">
+        <div class="team">
+          <div class="links">
+            <GithubLogo />
+            <div>GitHub</div>
+          </div>
         </div>
-        <div class="devpost">
-          <div><DevpostLogo /></div>
-          <div>Devpost</div>
+        <div class="team">
+          <div class="links">
+            <DevpostLogo />
+            <div>Devpost</div>
+          </div>
         </div>
       </div>
     </div>
@@ -38,13 +44,28 @@
 @import "../assets/style/constants.scss";
 footer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  //   background-color: #f5f5f5;
-  font-family: "Roboto", sans-serif;
-  font-size: 1.2rem;
   background-color: map-get($map: $themes, $key: text);
-  color: white;
+  padding: 2rem;
+  .wrapper {
+    flex-direction: row;
+    display: flex;
+    div {
+      padding: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      .team {
+        display: flex;
+        flex-direction: column;
+        padding-left: 0.5rem;
+        .links {
+          display: flex;
+          flex-direction: row;
+        }
+      }
+    }
+  }
 }
 </style>
