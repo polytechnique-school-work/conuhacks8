@@ -1,13 +1,15 @@
 use chrono::{Duration, NaiveDateTime};
+use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
-#[derive(Debug)]
+#[repr(u8)]
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 pub enum VehicleType {
-    CompactCars,
-    MediumCars,
-    FullSizeCars,
-    Class1Trucks,
-    Class2Trucks,
+    CompactCars = 0,
+    MediumCars = 1,
+    FullSizeCars = 2,
+    Class1Trucks = 3,
+    Class2Trucks = 4,
 }
 
 impl VehicleType {
@@ -22,13 +24,13 @@ impl VehicleType {
         }
     }
 
-    pub fn get_price(&self) -> f64 {
+    pub fn get_price(&self) -> u64 {
         match self {
-            VehicleType::CompactCars => 150.0,
-            VehicleType::MediumCars => 150.0,
-            VehicleType::FullSizeCars => 150.0,
-            VehicleType::Class1Trucks => 250.0,
-            VehicleType::Class2Trucks => 750.0,
+            VehicleType::CompactCars => 150,
+            VehicleType::MediumCars => 150,
+            VehicleType::FullSizeCars => 150,
+            VehicleType::Class1Trucks => 250,
+            VehicleType::Class2Trucks => 750,
         }
     }
 
@@ -43,40 +45,49 @@ impl VehicleType {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Reservation {
     pub id: Uuid,
-    pub start_date: NaiveDateTime,
-    pub end_date: NaiveDateTime,
+    pub call_date: NaiveDateTime,
+    pub reservation_date: NaiveDateTime,
     pub vehicle_type: VehicleType,
 }
 
 impl Reservation {
     pub fn new(
-        start_date: NaiveDateTime,
-        end_date: NaiveDateTime,
+        call_date: NaiveDateTime,
+        reservation_date: NaiveDateTime,
         vehicle_type: VehicleType,
     ) -> Self {
         Self {
             id: Uuid::new_v4(),
-            start_date,
-            end_date,
+            call_date,
+            reservation_date,
             vehicle_type,
         }
     }
 
     pub fn new_from_string(line: &str) -> Self {
         let mut split = line.split(',');
-        let start_date =
+        let call_date =
             NaiveDateTime::parse_from_str(split.next().unwrap(), "%Y-%m-%d %H:%M").unwrap();
-        let end_date =
+        let reservation_date =
             NaiveDateTime::parse_from_str(split.next().unwrap(), "%Y-%m-%d %H:%M").unwrap();
         let vehicle_type = VehicleType::from_string(split.next().unwrap());
         Self {
             id: Uuid::new_v4(),
-            start_date,
-            end_date,
+            call_date,
+            reservation_date,
             vehicle_type,
         }
+    }
+
+    pub fn overlap(&self, reservation: &Reservation) -> bool {
+        let reservation_time = std::cmp::max(
+            self.vehicle_type.get_time(),
+            reservation.vehicle_type.get_time(),
+        );
+        let delta = self.reservation_date - reservation.reservation_date;
+        delta.abs() < reservation_time
     }
 }

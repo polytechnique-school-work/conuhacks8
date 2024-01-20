@@ -1,8 +1,9 @@
 use crate::reservation::Reservation;
+use derive_more::{Deref, DerefMut};
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
-#[derive(Debug)]
+#[derive(Debug, Default, Deref, DerefMut)]
 pub struct Reservations {
     pub reservations: Vec<Reservation>,
 }
@@ -24,6 +25,11 @@ impl Reservations {
             let reservation = Reservation::new_from_string(&line);
             reservations.push(reservation);
         }
+        reservations.sort_unstable_by_key(|r| r.call_date);
         Self { reservations }
+    }
+
+    pub fn into_iter(self) -> impl Iterator<Item = Reservation> {
+        self.reservations.into_iter()
     }
 }
