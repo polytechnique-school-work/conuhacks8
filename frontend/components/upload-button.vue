@@ -7,7 +7,7 @@
     type="file" 
     accept=".csv"
     @input="uploadFile()"
-    ref="filePath"/>
+    ref="filePath" hidden/>
 </template>
 <style scoped lang="scss">
 @import "../assets/style/constants.scss";
