@@ -42,7 +42,7 @@ export default {
         }
         const content = e.target.result;
         if (url) { 
-          fetch(url, {
+          await fetch(url, {
             method: "POST",
             body: await JSON.stringify({ content })
           })
