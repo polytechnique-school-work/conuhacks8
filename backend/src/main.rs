@@ -1,24 +1,21 @@
-use crate::reservations::Reservations;
-use crate::state::AppState;
-use axum::{extract::State, response::IntoResponse, routing::get, Router};
-use hyper::StatusCode;
+use crate::{route::routes::routes, state::AppState};
+use api_doc::ApiDoc;
+use axum::Router;
 use tower::ServiceBuilder;
 use tower_http::trace::TraceLayer;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
+use utoipa::OpenApi;
+use utoipa_swagger_ui::SwaggerUi;
 
+pub mod api_doc;
 pub mod reservation;
 pub mod reservations;
+pub mod route;
+pub mod schedule;
 pub mod state;
-
-async fn hello(State(state): State<AppState>) -> impl IntoResponse {
-    (StatusCode::OK, "Hello world")
-}
 
 #[tokio::main]
 async fn main() {
-    let reservations = Reservations::new_from_file("datafile.csv");
-    println!("{:?}", reservations);
-
     tracing_subscriber::registry()
         .with(
             tracing_subscriber::EnvFilter::try_from_default_env()
@@ -31,7 +28,8 @@ async fn main() {
 
     // Compose the routes
     let app = Router::new()
-        .route("/hello", get(hello))
+        .merge(SwaggerUi::new("/doc").url("/api-docs/openapi.json", ApiDoc::openapi()))
+        .nest("/api/", routes())
         // Add middleware to all routes
         .layer(
             ServiceBuilder::new()
