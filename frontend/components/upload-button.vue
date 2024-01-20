@@ -7,7 +7,7 @@
     type="file" 
     accept=".csv"
     @input="uploadFile()"
-    ref="filePath"/>
+    ref="filePath" hidden/>
 </template>
 <style scoped lang="scss">
 @import "../assets/style/constants.scss";
@@ -20,6 +20,7 @@
   width: 350px;
   color: map-get($map: $themes, $key: text);
   background-color: map-get($map: $themes, $key: primary);
+  border-radius: 5px;
 }
 
 </style>
