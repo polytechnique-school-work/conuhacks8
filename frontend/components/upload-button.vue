@@ -27,7 +27,7 @@
 <script lang="ts">
 export default {
   methods: {
-    async uploadFile(url: URL) {
+    async uploadFile(url: URL | string = "") {
       const file = this.$refs.filePath.files[0];
       if (!file) {
         console.log("No file selected");
