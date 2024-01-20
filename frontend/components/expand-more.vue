@@ -1,0 +1,5 @@
+<template>
+  <svg xmlns="http://www.w3.org/2000/svg" height="32" viewBox="0 -960 960 960" width="32">
+    <path d="m296-345-56-56 240-240 240 240-56 56-184-184-184 184Z" />
+  </svg>
+</template>
