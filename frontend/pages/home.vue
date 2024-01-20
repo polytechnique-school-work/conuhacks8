@@ -4,15 +4,15 @@ console.log("Ici");
 <template>
   <div class="page-container">
     <autoadmin-logo></autoadmin-logo>
+    <upload-button></upload-button>
   </div>
 </template>
 <style scoped lang="scss">
 .page-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100%;
-  padding-top: 10px;
 }
 </style>
