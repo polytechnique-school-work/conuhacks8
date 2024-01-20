@@ -7,16 +7,15 @@ RUN apk add --no-cache musl-dev
 RUN apk add --no-cache pkgconfig
 RUN apk add --no-cache libressl-dev
 
-# Make an /app dir, which everything will eventually live in
-RUN mkdir -p /app
-WORKDIR /app
-COPY . .
-WORKDIR /app/backend
-
-# Build the app
-RUN cargo build --release
-
-RUN cp ./target/release/backend /bin/server
+RUN --mount=type=bind,source=src,target=src \
+    --mount=type=bind,source=Cargo.toml,target=Cargo.toml \
+    --mount=type=cache,target=/app/target/ \
+    --mount=type=cache,target=/usr/local/cargo/registry/ \
+    <<EOF
+set -e
+cargo build --release
+cp ./target/release/backend /bin/backend
+EOF
 
 FROM alpine as runner
 # Copy the server binary to the /app directory
@@ -31,7 +30,9 @@ RUN adduser \
     appuser
 USER appuser
 
-COPY --from=builder /bin/server /bin/
+COPY --from=builder /bin/backend /bin/
+
+COPY ./datafile.csv datafile.csv
 
 # Set any required env variables and
 ENV RUST_LOG="info"
