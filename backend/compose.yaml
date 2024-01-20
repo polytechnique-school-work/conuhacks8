@@ -1,0 +1,7 @@
+services:
+  backend:
+    container_name: backend
+    hostname: backend
+    build: .
+    ports:
+      - 6942:6942
