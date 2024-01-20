@@ -35,14 +35,19 @@ export default {
       }
       
       const reader = new FileReader();
+      reader.readAsText(file);
       reader.onload = async function(e) {
-        if (!e.target)
-          return
+        if (!e.target){
+          return;
+        }
         const content = e.target.result;
-        fetch(url, {
-          method: "POST",
-          body: await JSON.stringify({content})
-        })
+        if (url) { 
+          fetch(url, {
+            method: "POST",
+            body: await JSON.stringify({ content })
+          })
+        }
+        window.location.href = "/dashboard";
       };
     }
   }

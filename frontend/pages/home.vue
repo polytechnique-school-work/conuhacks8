@@ -1,5 +1,5 @@
 <script>
-console.log("Ici");
+
 </script>
 <template>
   <div class="page-container">
