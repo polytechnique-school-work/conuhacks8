@@ -35,14 +35,16 @@
 </template>
 
 <style scoped lang="scss">
+@import "../assets/style/constants.scss";
 footer {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background-color: #f5f5f5;
+  //   background-color: #f5f5f5;
   font-family: "Roboto", sans-serif;
   font-size: 1.2rem;
-  color: #333;
+  background-color: map-get($map: $themes, $key: text);
+  color: white;
 }
 </style>
