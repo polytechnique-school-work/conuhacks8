@@ -1,6 +1,6 @@
 # Sample configuration taken from leptos
 # Get started with a build env with Rust nightly
-FROM rustlang/rust:alpine as builder
+FROM rust:alpine as builder
 
 #Install libc equivalent
 RUN apk add --no-cache musl-dev
