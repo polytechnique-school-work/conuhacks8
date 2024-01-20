@@ -16,13 +16,25 @@ WORKDIR /app/backend
 # Build the app
 RUN cargo build --release
 
+RUN cp ./target/release/backend /bin/server
+
 FROM alpine as runner
 # Copy the server binary to the /app directory
-COPY --from=builder /app/backend/target/release/backend /app/
+ARG UID=10001
+RUN adduser \
+    --disabled-password \
+    --gecos "" \
+    --home "/nonexistent" \
+    --shell "/sbin/nologin" \
+    --no-create-home \
+    --uid "${UID}" \
+    appuser
+USER appuser
 
-WORKDIR /app
+COPY --from=builder /bin/server /bin/
+
 # Set any required env variables and
 ENV RUST_LOG="info"
 EXPOSE 6942
-# Run the server
-CMD ["/app/backend"]
+
+CMD ["/bin/backend"]
