@@ -1,21 +1,35 @@
-<script lang="ts">
-export default {
-  methods: {
-    sendDate(date: string) {
-      defineEmits(["date"])("date", date);
-    },
-    onClick() {
-      // @ts-ignore
-      sendDate(this.$refs.date.value);
-    },
-  },
-};
+<script setup lang="ts">
+  const router = useRouter();
+  const route = useRoute();
+
+  function getDayOfYear(date: Date): number {
+    const startOfYear = new Date(date.getFullYear(), 0, 0);
+    const timeDifference = date.getTime() - startOfYear.getTime();
+    const days = Math.floor(timeDifference / (24 * 60 * 60 * 1000));
+
+    return days;
+  }
+
+  function dayOfYearToDate(): string {
+    const startOfYear = new Date(2022, 0, 0);
+    const date = route.params.date as unknown as number;
+    const timeStamp = startOfYear.getTime() + date * 24 * 3600 * 1000;
+    const dateOf = new Date(timeStamp);
+    return dateOf.toISOString().split('T')[0];
+  }
+  const pageDate = dayOfYearToDate();
+
+  function onClick(event: any) {
+    const date: number = getDayOfYear(new Date(event.target.value));
+    router.replace('/dashboard/' + date);
+  }
+
 </script>
 
 <template>
   <Box class="dateBox" title="Date">
     <div class="info">
-      <input ref="date" type="date" id="start" name="trip-start" value="2024-01-20" @input="onClick" />
+      <input ref="date" type="date" id="start" name="trip-start" :value="pageDate" @input="onClick" />
     </div>
   </Box>
 </template>
