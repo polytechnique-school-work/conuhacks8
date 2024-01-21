@@ -5,6 +5,7 @@ use utoipa::OpenApi;
 #[openapi(
         paths(
             day::get_day,
+            day::get_reservation_day,
             upload::upload,
         ),
         components(
