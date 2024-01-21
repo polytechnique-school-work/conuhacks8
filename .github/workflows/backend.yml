@@ -1,0 +1,33 @@
+name: Backend CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'backend/**'
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - 'backend/**'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Build the Docker image
+      run: |
+        docker login --username ${{github.actor}} --password ${{ secrets.GITHUB_TOKEN }} ghcr.io
+        docker build ./backend/ --file ./backend/Dockerfile --platform linux/amd64 --tag ghcr.io/polytechnique-school-work/conuhacks_backend:lastest
+        docker push ghcr.io/polytechnique-school-work/conuhacks_backend:lastest
+
+    - name: Run Tests
+      run: |
+        cd backend
+        cargo test
