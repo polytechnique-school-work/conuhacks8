@@ -1,18 +1,20 @@
-use crate::{route::day, schedule};
+use crate::{route::day, route::upload, schedule};
 use utoipa::OpenApi;
 
 #[derive(OpenApi)]
 #[openapi(
         paths(
             day::get_day,
+            upload::upload,
         ),
         components(
             schemas(
                 schedule::day_info::DayInfo,
+                upload::UploadFile,
             )
         ),
         tags(
-            (name = "TODO", description = "TODO")
+            (name = "AutoAdmin", description = "AutoAdmin API"),
         )
     )]
 pub struct ApiDoc;

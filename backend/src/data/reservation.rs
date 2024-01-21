@@ -21,18 +21,19 @@ impl fmt::Debug for Reservation {
 }
 
 impl Reservation {
-    pub fn new_from_string(line: &str) -> Self {
+    pub fn new_from_string(line: &str) -> Option<Self> {
         let mut split = line.split(',');
-        let call_date =
-            NaiveDateTime::parse_from_str(split.next().unwrap(), "%Y-%m-%d %H:%M").unwrap();
-        let reservation_date =
-            NaiveDateTime::parse_from_str(split.next().unwrap(), "%Y-%m-%d %H:%M").unwrap();
-        let vehicle_type = VehicleType::from_string(split.next().unwrap());
-        Self {
+        let next = split.next()?;
+        let call_date = NaiveDateTime::parse_from_str(next, "%Y-%m-%d %H:%M").ok()?;
+        let next = split.next()?;
+        let reservation_date = NaiveDateTime::parse_from_str(next, "%Y-%m-%d %H:%M").ok()?;
+        let next = split.next()?;
+        let vehicle_type = VehicleType::from_string(next)?;
+        Some(Self {
             call_date: call_date.into(),
             reservation_date: reservation_date.into(),
             vehicle_type,
-        }
+        })
     }
 
     pub fn overlap(&self, reservation: &Reservation) -> bool {

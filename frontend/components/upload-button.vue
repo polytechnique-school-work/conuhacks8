@@ -20,7 +20,7 @@
 <script lang="ts">
 export default {
   methods: {
-    async uploadFile(url: URL | string = "") {
+    async uploadFile(url: URL | string = "http://localhost:6942/api/upload") {
       const file = this.$refs.filePath.files[0];
       if (!file) {
         console.log("No file selected");

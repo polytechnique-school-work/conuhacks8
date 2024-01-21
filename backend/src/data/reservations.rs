@@ -31,18 +31,18 @@ impl Reservations {
         self.last().map(|r| r.reservation_date.duration)
     }
 
-    pub fn new_from_file(filename: &str) -> Self {
+    pub fn new_from_file(filename: &str) -> Option<Self> {
         let mut reservations = Vec::new();
         let file = File::open(filename).expect("Unable to open file");
         let reader = BufReader::new(file);
 
         for line in reader.lines() {
             let line = line.unwrap();
-            let reservation = Reservation::new_from_string(&line);
+            let reservation = Reservation::new_from_string(&line)?;
             reservations.push(reservation);
         }
         reservations.sort_unstable_by_key(|r| r.call_date);
-        Self { reservations }
+        Some(Self { reservations })
     }
 
     pub fn into_iter(self) -> impl Iterator<Item = Reservation> {

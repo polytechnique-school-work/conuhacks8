@@ -12,14 +12,14 @@ pub enum VehicleType {
 }
 
 impl VehicleType {
-    pub fn from_string(s: &str) -> Self {
+    pub fn from_string(s: &str) -> Option<Self> {
         match s {
-            "compact" => Self::CompactCars,
-            "medium" => Self::MediumCars,
-            "full-size" => Self::FullSizeCars,
-            "class 1 truck" => Self::Class1Trucks,
-            "class 2 truck" => Self::Class2Trucks,
-            _ => panic!("Invalid vehicle type"),
+            "compact" => Some(Self::CompactCars),
+            "medium" => Some(Self::MediumCars),
+            "full-size" => Some(Self::FullSizeCars),
+            "class 1 truck" => Some(Self::Class1Trucks),
+            "class 2 truck" => Some(Self::Class2Trucks),
+            _ => None,
         }
     }
 

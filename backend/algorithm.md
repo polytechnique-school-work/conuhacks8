@@ -10,7 +10,9 @@ These vectors are sorted in descending order based on the departure time.
 
 ### Algorithm Application
 
-Our algorithm is applied over 5 slots, as we need to leave another 5 for walk-in reservations.
+Slots Allocation
+
+- Total Slots: 10 (5 for algorithm allocation, 5 reserved for walk-ins).
 
 #### Time Definitions
 
@@ -45,7 +47,7 @@ Start with `T0 = min(slot)` and iterate until `T0 < 19`:
     - `Else`: Select Truck2.
 3. `Else`:
     - `If` $Tv1 - T1 > 12$ and $\Delta T2 < 120$: Select the last Truck1.
-    - `Else if` $\Delta T1 + 30 < \Delta Tv2$ and $\Delta T2 < 120`: Select the last Truck1.
+    - `Else if` $\Delta T1 + 30 < \Delta Tv2$ and $\Delta T2 < 120$: Select the last Truck1.
     - `Else`:
         - `If` $\Delta Tv1 + 30 < 180$: Select the last car.
         - `Else`: `T0 += 30`.

@@ -5,7 +5,7 @@ use backend::{
 };
 
 fn main() {
-    let reservations = Reservations::new_from_file("datafile.csv");
+    let reservations = Reservations::new_from_file("datafile.csv").unwrap();
     let year = Year::new(reservations.clone());
     let mut schedule = Schedule::default();
     schedule.add_all_fifo(reservations.to_vec());
