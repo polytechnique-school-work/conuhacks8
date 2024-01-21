@@ -1,11 +1,8 @@
-<script>
-
-</script>
 <template>
   <div class="page-container">
     <div class="items-container">
-    <autoadmin-logo></autoadmin-logo>
-    <upload-button></upload-button>
+      <div class="image"><AutoadminLogo /></div>
+      <UploadButton />
     </div>
   </div>
 </template>
@@ -15,7 +12,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 80%;
+  height: 100%;
 }
 .items-container {
   display: flex;
@@ -24,5 +21,12 @@
   justify-content: center;
   height: 100%;
   padding: 20px;
+}
+
+.image {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  margin-bottom: 20px;
 }
 </style>
