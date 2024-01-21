@@ -26,9 +26,7 @@ const props = defineProps<{
 .element-inner {
   position: absolute;
   width: 100%;
-  background-color: red;
-  border-radius: 5px;
-  padding: 5px;
+  background-color: #831e12;
   border-color: black;
   border-style: solid 1px;
 }
