@@ -21,12 +21,10 @@ pub async fn get_day(
     State(app): State<AppState>,
     Path((year, ordinal)): Path<(usize, usize)>,
 ) -> Result<Json<DayInfo>, StatusCode> {
-    let day_info = app
-        .schedule
-        .read()
-        .await
+    let schedule = app.schedule.read().await;
+    let day_info = schedule
         .get_day(ordinal)
         .ok_or(StatusCode::NOT_FOUND)?
-        .get_day_info();
+        .get_day_info(schedule.get_day(ordinal - 1).ok_or(StatusCode::NOT_FOUND)?);
     Ok(Json(day_info))
 }
