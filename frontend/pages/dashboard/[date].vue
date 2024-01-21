@@ -13,10 +13,9 @@ type Data = {
 };
 const route = useRoute();
 
-const response = await fetch("http://127.0.0.1:6942/api/day/2022/" + route.params.date);
+const response = await fetch("https://api.gagolino.com/api/day/2022/" + route.params.date);
 const data: Data = await response.json();
 
-console.log(data.vehicules_served);
 </script>
 
 <template>
@@ -24,91 +23,30 @@ console.log(data.vehicules_served);
     <div class="dashboard">
       <DateSelector></DateSelector>
       <div v-if="data" class="displays">
-        <SingleValueBox
-          :big-value="data.revenue + '$'"
-          :value="Math.abs(data.delta_revenue) + '$'"
-          :variation="data.delta_revenue <= 0 ? 'increase' : 'decrease'"
-          title="Revenue"
-        ></SingleValueBox>
-        <SingleValueBox
-          :big-value="data.revenue_miss + '$'"
-          :value="Math.abs(data.delta_revenue_miss) + '$'"
-          :variation="data.delta_revenue_miss <= 0 ? 'increase' : 'decrease'"
-          title="Revenue Miss"
-        ></SingleValueBox>
-        <SingleValueBox
-          :big-value="data.clients_served + ' clients'"
-          :value="Math.abs(data.delta_clients_served) + ' clients'"
-          :variation="data.delta_clients_served <= 0 ? 'increase' : 'decrease'"
-          title="Client served"
-        ></SingleValueBox>
-        <div></div>
-        <div></div>
-        <SingleValueBox
-          :big-value="data.vehicules_served[0].toString()"
-          :value="Math.abs(data.vehicules_served[0]).toString()"
-          :variation="data.delta_vehicules_served[0] <= 0 ? 'increase' : 'decrease'"
-          title="Client served"
-        ></SingleValueBox>
-        <SingleValueBox
-          :big-value="data.vehicules_served[1].toString()"
-          :value="Math.abs(data.vehicules_served[1]).toString()"
-          :variation="data.delta_vehicules_served[1] <= 0 ? 'increase' : 'decrease'"
-          title="Client served"
-        ></SingleValueBox>
-        <SingleValueBox
-          :big-value="data.vehicules_served[2].toString()"
-          :value="Math.abs(data.vehicules_served[2]).toString()"
-          :variation="data.delta_vehicules_served[2] <= 0 ? 'increase' : 'decrease'"
-          title="Client served"
-        ></SingleValueBox>
-        <SingleValueBox
-          :big-value="data.vehicules_served[3].toString()"
-          :value="Math.abs(data.vehicules_served[3]).toString()"
-          :variation="data.delta_vehicules_served[3] <= 0 ? 'increase' : 'decrease'"
-          title="Client served"
-        ></SingleValueBox>
-        <SingleValueBox
-          :big-value="data.vehicules_served[4].toString()"
-          :value="Math.abs(data.vehicules_served[4]).toString()"
-          :variation="data.delta_vehicules_served[4] <= 0 ? 'increase' : 'decrease'"
-          title="Client served"
-        ></SingleValueBox>
-
-        <SingleValueBox
-          :big-value="data.vehicules_decline[0].toString()"
-          :value="Math.abs(data.vehicules_decline[0]).toString()"
-          :variation="data.delta_vehicules_decline[0] <= 0 ? 'increase' : 'decrease'"
-          title="Client served"
-        ></SingleValueBox>
-        <SingleValueBox
-          :big-value="data.vehicules_decline[1].toString()"
-          :value="Math.abs(data.vehicules_decline[1]).toString()"
-          :variation="data.delta_vehicules_decline[1] <= 0 ? 'increase' : 'decrease'"
-          title="Client served"
-        ></SingleValueBox>
-        <SingleValueBox
-          :big-value="data.vehicules_decline[2].toString()"
-          :value="Math.abs(data.vehicules_decline[2]).toString()"
-          :variation="data.delta_vehicules_decline[2] <= 0 ? 'increase' : 'decrease'"
-          title="Client served"
-        ></SingleValueBox>
-        <SingleValueBox
-          :big-value="data.vehicules_decline[3].toString()"
-          :value="Math.abs(data.vehicules_decline[3]).toString()"
-          :variation="data.delta_vehicules_decline[3] <= 0 ? 'increase' : 'decrease'"
-          title="Client served"
-        ></SingleValueBox>
-        <SingleValueBox
-          :big-value="data.vehicules_decline[4].toString()"
-          :value="Math.abs(data.vehicules_decline[4]).toString()"
-          :variation="data.delta_vehicules_decline[4] <= 0 ? 'increase' : 'decrease'"
-          title="Client served"
-        ></SingleValueBox>
+        <div class="row">
+          <SingleValueBox :big-value="data.revenue + '$'" :value="Math.abs(data.delta_revenue) + '$'" :variation="data.delta_revenue <= 0 ? 'increase': 'decrease'" title="Revenue" class="box"></SingleValueBox>
+          <SingleValueBox :big-value="data.revenue_miss + '$'" :value="Math.abs(data.delta_revenue_miss) + '$'" :variation="data.delta_revenue_miss <= 0 ? 'increase': 'decrease'" title="Revenue Miss" class="box"></SingleValueBox>
+          <SingleValueBox :big-value="data.clients_served + ' clients'" :value="Math.abs(data.delta_clients_served) + ' clients'" :variation="data.delta_clients_served <= 0 ? 'increase': 'decrease'" title="Client served" class="box"></SingleValueBox>
+        </div>
+        
+        <div class="row">
+          <SingleValueBox :big-value="data.vehicules_served[0] + ''" :value="Math.abs(data.vehicules_served[0]) + ''" :variation="data.delta_vehicules_served[0] <= 0 ? 'increase': 'decrease'" title="Client served compact" class="box"></SingleValueBox>
+          <SingleValueBox :big-value="data.vehicules_served[1] + ''" :value="Math.abs(data.vehicules_served[1]) + ''" :variation="data.delta_vehicules_served[1] <= 0 ? 'increase': 'decrease'" title="Client served medium" class="box"></SingleValueBox>
+          <SingleValueBox :big-value="data.vehicules_served[2] + ''" :value="Math.abs(data.vehicules_served[2]) + ''" :variation="data.delta_vehicules_served[2] <= 0 ? 'increase': 'decrease'" title="Client served full-size" class="box"></SingleValueBox>
+          <SingleValueBox :big-value="data.vehicules_served[3] + ''" :value="Math.abs(data.vehicules_served[3]) + ''" :variation="data.delta_vehicules_served[3] <= 0 ? 'increase': 'decrease'" title="Client served class 1 truck" class="box"></SingleValueBox>
+          <SingleValueBox :big-value="data.vehicules_served[4] + ''" :value="Math.abs(data.vehicules_served[4]) + ''" :variation="data.delta_vehicules_served[4] <= 0 ? 'increase': 'decrease'" title="Client served class 2 truck" class="box"></SingleValueBox>
+        </div>
+        <div class="row">
+          <SingleValueBox :big-value="data.vehicules_decline[0] + ''" :value="Math.abs(data.vehicules_decline[0]) + ''" :variation="data.delta_vehicules_decline[0] <= 0 ? 'increase': 'decrease'" title="Client decline compact" class="box"></SingleValueBox>
+          <SingleValueBox :big-value="data.vehicules_decline[1] + ''" :value="Math.abs(data.vehicules_decline[1]) + ''" :variation="data.delta_vehicules_decline[1] <= 0 ? 'increase': 'decrease'" title="Client decline medium" class="box"></SingleValueBox>
+          <SingleValueBox :big-value="data.vehicules_decline[2] + ''" :value="Math.abs(data.vehicules_decline[2]) + ''" :variation="data.delta_vehicules_decline[2] <= 0 ? 'increase': 'decrease'" title="Client decline full-size" class="box"></SingleValueBox>
+          <SingleValueBox :big-value="data.vehicules_decline[3] + ''" :value="Math.abs(data.vehicules_decline[3]) + ''" :variation="data.delta_vehicules_decline[3] <= 0 ? 'increase': 'decrease'" title="Client decline class 1 truck" class="box"></SingleValueBox>
+          <SingleValueBox :big-value="data.vehicules_decline[4] + ''" :value="Math.abs(data.vehicules_decline[4]) + ''" :variation="data.delta_vehicules_decline[4] <= 0 ? 'increase': 'decrease'" title="Client decline class 2 truck" class="box"></SingleValueBox>
+        </div>
       </div>
       <div v-else>Aucune donnée n'a été trouvée pour ce jours là</div>
       <div class="buttons">
-        <NuxtLink to="/garage"
+        <NuxtLink :to="'/garage/' + route.params.date"
           ><Button title="View Garage"><SettingsIcon /></Button
         ></NuxtLink>
       </div>
@@ -129,21 +67,24 @@ console.log(data.vehicules_served);
     align-items: center;
     justify-content: center;
     width: 75%;
-    gap: 2rem;
-    // max-width: 1200px;
-    & .displays {
-      display: grid;
-      grid-template-columns: auto auto auto auto auto;
-      gap: 2rem;
-      width: 100%;
-    }
-
-    & .buttons {
-      display: grid;
-      grid-template-columns: auto auto auto auto auto;
-      gap: 2rem;
-      width: 100%;
-    }
+    gap: 2em;
   }
+}
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 1em;
+}
+.box {
+  width: 14em;
+}
+.displays {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1em;
 }
 </style>

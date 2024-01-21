@@ -20,7 +20,7 @@
 <script lang="ts">
 export default {
   methods: {
-    async uploadFile(url: URL | string = "http://localhost:6942/api/upload") {
+    async uploadFile(url: URL | string = "https://api.gagolino.com/api/upload") {
       const file = this.$refs.filePath.files[0];
       if (!file) {
         console.log("No file selected");
@@ -35,10 +35,14 @@ export default {
         }
         const content = e.target.result;
         if (url) {
-          await fetch(url, {
+          const res = await fetch(url, {
             method: "POST",
             body: await JSON.stringify({ content }),
           });
+          if (res.status !== 200) {
+            console.log("Error while uploading file");
+            return;
+          }
         }
         window.location.href = "/dashboard";
       };
