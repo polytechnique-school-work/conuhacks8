@@ -1,58 +1,28 @@
-<script lang="ts">
-// import { useRoute } from "vue-router";
-// const route = useRoute();
-// console.log(route);
-const data: {
-  [key: string]: {
-    revenue: number;
-    revenue_variation: number;
-    revenue_missed: number;
-    revenue_missed_variation: number;
-    clients_served: number;
-    clients_served_variation: number;
-  };
-} = {
-  "2024-01-01": {
-    revenue: 230,
-    revenue_variation: -15,
-    revenue_missed: 612,
-    revenue_missed_variation: 57,
-    clients_served: 20,
-    clients_served_variation: 5,
-  },
+<script setup lang="ts">
+type Data = {
+  revenue: number,
+  delta_revenue: number,
+  revenue_miss: number,
+  delta_revenue_miss: number,
+  clients_served: number,
+  delta_clients_served: number,
 };
+const route = useRoute();
 
-export default {
-  methods: {
-    async changeDate(value: string) {
-    },
-    getData(): {
-      revenue: number;
-      revenue_variation: number;
-      revenue_missed: number;
-      revenue_missed_variation: number;
-      clients_served: number;
-      clients_served_variation: number;
-    } {
-      return data[this.$route.params.date as string];
-    },
-    receiveDate(date: string) {
-      navigateTo(`/dashboard/${date}`);
-    },
-  },
-};
+const { data: day } = await useFetch("http://127.0.0.1:6942/api/day/2022/" + route.params.date);
+const data = day as unknown as Data;
+
+const receiveDate = null;
 </script>
 
 <template>
   <div class="wrapper">
     <div class="dashboard">
-      <DateSelector @date="receiveDate"></DateSelector>
-      <div v-if="getData != null" class="displays">
-        <SingleValueBox big-value="230$" value="2$" variation="increase" title="Revenue"></SingleValueBox>
-        <SingleValueBox big-value="612$" value="4000$" variation="decrease" title="Revenue missed"></SingleValueBox>
-        <SingleValueBox big-value="20" value="5" variation="increase" title="Clients served"></SingleValueBox>
-        <SingleValueBox big-value="20" value="5" variation="increase" title="Clients served"></SingleValueBox>
-        <SingleValueBox big-value="20" value="5" variation="increase" title="Clients served"></SingleValueBox>
+      <DateSelector :sendDate="receiveDate"></DateSelector>
+      <div v-if="data" class="displays">
+        <SingleValueBox :big-value="data.revenue + '$'" :value="Math.abs(data.delta_revenue) + '$'" :variation="data.delta_revenue <= 0 ? 'increase': 'decrease'" title="Revenue"></SingleValueBox>
+        <SingleValueBox :big-value="data.revenue_miss + '$'" :value="Math.abs(data.delta_revenue_miss) + '$'" :variation="data.delta_revenue_miss <= 0 ? 'increase': 'decrease'" title="Revenue Miss"></SingleValueBox>
+        <SingleValueBox :big-value="data.clients_served + ' clients'" :value="Math.abs(data.delta_clients_served) + ' clients'" :variation="data.delta_clients_served <= 0 ? 'increase': 'decrease'" title="Revenue Miss"></SingleValueBox>
       </div>
       <div v-else>Aucune donnée n'a été trouvée pour ce jours là</div>
       <div class="buttons">
