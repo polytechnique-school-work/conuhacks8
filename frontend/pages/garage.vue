@@ -20,17 +20,6 @@
     </div>
 
     <div class="timelines">
-      <!-- <CartTimeline></CartTimeline>
-      <CartTimeline></CartTimeline>
-      <CartTimeline></CartTimeline>
-      <CartTimeline></CartTimeline>
-      <CartTimeline></CartTimeline>
-      <CartTimeline></CartTimeline>
-      <CartTimeline></CartTimeline>
-      <CartTimeline></CartTimeline>
-      <CartTimeline></CartTimeline>
-      <CartTimeline></CartTimeline> -->
-
       <div class="cartimeline">test</div>
       <div class="cartimeline">test</div>
       <div class="cartimeline">test</div>
