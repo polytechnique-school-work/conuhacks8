@@ -20,6 +20,7 @@
     </div>
 
     <div class="timelines">
+      <!-- <CartTimeline></CartTimeline>
       <CartTimeline></CartTimeline>
       <CartTimeline></CartTimeline>
       <CartTimeline></CartTimeline>
@@ -28,8 +29,18 @@
       <CartTimeline></CartTimeline>
       <CartTimeline></CartTimeline>
       <CartTimeline></CartTimeline>
-      <CartTimeline></CartTimeline>
-      <CartTimeline></CartTimeline>
+      <CartTimeline></CartTimeline> -->
+
+      <div class="cartimeline">test</div>
+      <div class="cartimeline">test</div>
+      <div class="cartimeline">test</div>
+      <div class="cartimeline">test</div>
+      <div class="cartimeline">test</div>
+      <div class="cartimeline">test</div>
+      <div class="cartimeline">test</div>
+      <div class="cartimeline">test</div>
+      <div class="cartimeline">test</div>
+      <div class="cartimeline">test</div>
     </div>
   </div>
 </template>
@@ -40,16 +51,28 @@
   height: 100%;
   display: flex;
   flex-direction: row;
+  padding: 2rem;
+  box-sizing: border-box;
 
   & .hours {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    margin: 0.5rem;
   }
   & .timelines {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    width: 100%;
+    gap: 0.5rem;
+
+    & .cartimeline {
+      width: 100%;
+      height: 100%;
+      background-color: white;
+      border-radius: 5px;
+    }
   }
 }
 </style>
