@@ -35,10 +35,14 @@ export default {
         }
         const content = e.target.result;
         if (url) {
-          await fetch(url, {
+          const res = await fetch(url, {
             method: "POST",
             body: await JSON.stringify({ content }),
           });
+          if (res.status !== 200) {
+            console.log("Error while uploading file");
+            return;
+          }
         }
         window.location.href = "/dashboard";
       };
