@@ -21,13 +21,13 @@ impl Default for Schedule {
 }
 
 impl Schedule {
-    pub fn add(&mut self, reservation: Reservation) {
+    pub fn add_fifo(&mut self, reservation: Reservation) {
         let day = reservation.reservation_date.ordinal0() as usize;
         self.days[day].push(reservation);
     }
-    pub fn add_all(&mut self, reservations: Reservations) {
+    pub fn add_all_fifo(&mut self, reservations: Reservations) {
         for reservation in reservations.into_iter() {
-            self.add(reservation);
+            self.add_fifo(reservation);
         }
     }
     pub fn get_day(&self, day: usize) -> Option<&Day> {

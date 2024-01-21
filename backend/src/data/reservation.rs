@@ -1,4 +1,4 @@
-use chrono::{Datelike, Duration, NaiveDateTime};
+use chrono::{Datelike, NaiveDateTime};
 use serde::{Deserialize, Serialize};
 
 use super::vehicle::VehicleType;
