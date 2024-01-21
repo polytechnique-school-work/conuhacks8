@@ -1,10 +1,12 @@
 <template>
-  <HeaderComponent />
+  <AppHeader />
   <div class="container">
-    <Nuxt />
-    <div class="wrapper"><slot /></div>
+    <!-- <Nuxt /> -->
+    <div class="wrapper">
+      <slot />
+    </div>
   </div>
-  <Footer />
+  <AppFooter />
 </template>
 
 <style scoped lang="scss">

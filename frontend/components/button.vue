@@ -18,7 +18,7 @@ const props = defineProps<{
   align-items: center;
   justify-content: center;
   height: 60px;
-  width: 350px;
+  width: 100%;
   color: white;
   background-color: map-get($map: $themes, $key: primary);
   border-radius: 5px;

@@ -1,6 +1,8 @@
 <template>
   <div class="header">
-    <div class="image"><img src="/img/AutoAdmin.png" alt="" />AutoAdmin</div>
+    <NuxtLink to="/dashboard">
+      <div class="image"><img src="/img/AutoAdmin.png" alt="" />AutoAdmin</div>
+    </NuxtLink>
   </div>
 </template>
 <style scoped lang="scss">

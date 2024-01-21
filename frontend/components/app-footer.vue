@@ -6,15 +6,15 @@
         <div class="frontend">
           Frontend
           <div class="team grey">
-            <div>Gabriel Landry</div>
-            <div>Luckas Rakotondrafara</div>
+            <div><a href="https://github.com/Sportek" target="_blank">Gabriel Landry</a></div>
+            <div><a href="https://github.com/LuckasRakoto" target="_blank">Luckas Rakotondrafara</a></div>
           </div>
         </div>
         <div class="backend">
           Backend
           <div class="team grey">
-            <div>Marc-Antoine Manningham</div>
-            <div>Gaëtan Florio</div>
+            <div><a href="https://github.com/marcantoinem" target="_blank">Marc-Antoine Manningham</a></div>
+            <div><a href="https://github.com/celidur" target="_blank">Gaëtan Florio</a></div>
           </div>
         </div>
       </div>
@@ -25,18 +25,22 @@
       <div class="wrapper">
         <div class="team">
           <div class="links">
-            <div class="grey">
-              <a href="https://github.com/polytechnique-school-work/conuhacks8"><GithubLogo /></a>
-            </div>
-            <div class="grey">GitHub</div>
+            <a href="https://github.com/polytechnique-school-work/conuhacks8" target="_blank">
+              <div class="grey">
+                <GithubLogo />
+              </div>
+              <div class="grey">GitHub</div>
+            </a>
           </div>
         </div>
         <div class="team">
           <div class="links">
-            <div class="grey">
-              <a href="https://devpost.com/software/606404/joins/DinLic1vr1UEJa2hJnn5mA"><DevpostLogo /></a>
-            </div>
-            <div class="grey">Devpost</div>
+            <a href="https://devpost.com/software/todo-of2gv9" target="_blank">
+              <div class="grey">
+                <DevpostLogo />
+              </div>
+              <div class="grey">Devpost</div>
+            </a>
           </div>
         </div>
       </div>
@@ -68,9 +72,11 @@ footer {
   }
 }
 .links {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  & a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
 }
 
 .grey {
