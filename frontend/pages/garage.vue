@@ -20,7 +20,7 @@
     </div>
 
     <div class="timelines">
-      <div class="cartimeline">test</div>
+      <div class="cartimeline"><CarTimeline /></div>
       <div class="cartimeline">test</div>
       <div class="cartimeline">test</div>
       <div class="cartimeline">test</div>
