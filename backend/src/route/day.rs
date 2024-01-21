@@ -19,7 +19,7 @@ use hyper::StatusCode;
 )]
 pub async fn get_day(
     State(app): State<AppState>,
-    Path((year, ordinal)): Path<(usize, usize)>,
+    Path((_year, ordinal)): Path<(usize, usize)>,
 ) -> Result<Json<DayInfo>, StatusCode> {
     let schedule = app.schedule.read().await;
     let day_info = schedule
