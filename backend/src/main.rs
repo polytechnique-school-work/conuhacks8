@@ -1,7 +1,9 @@
 use axum::Router;
 use backend::api_doc::ApiDoc;
 use backend::{route::routes::routes, state::AppState};
+use hyper::Method;
 use tower::ServiceBuilder;
+use tower_http::cors::{Any, CorsLayer};
 use tower_http::trace::TraceLayer;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 use utoipa::OpenApi;
@@ -19,6 +21,12 @@ async fn main() {
 
     let state = AppState::new();
 
+    let cors = CorsLayer::new()
+        // allow `GET` and `POST` when accessing the resource
+        .allow_methods([Method::GET, Method::POST])
+        // allow requests from any origin
+        .allow_origin(Any);
+
     // Compose the routes
     let app = Router::new()
         .merge(SwaggerUi::new("/doc").url("/api-docs/openapi.json", ApiDoc::openapi()))
@@ -27,6 +35,7 @@ async fn main() {
         .layer(
             ServiceBuilder::new()
                 .layer(TraceLayer::new_for_http())
+                .layer(cors)
                 .into_inner(),
         )
         .with_state(state);

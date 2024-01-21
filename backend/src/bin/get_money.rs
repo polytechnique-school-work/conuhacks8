@@ -28,6 +28,6 @@ fn main() {
         best_comb.get_vehicules_refused().iter().sum::<usize>()
             + best_comb.get_vehicules_served().iter().sum::<usize>()
     );
-    println!("{:#?}", fifo_comb.get_day_info());
-    println!("{:#?}", best_comb.get_day_info());
+    // println!("{:#?}", fifo_comb.get_day_info());
+    // println!("{:#?}", best_comb.get_day_info());
 }
