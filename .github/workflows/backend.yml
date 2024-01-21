@@ -2,13 +2,13 @@ name: Backend CI/CD
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
     paths:
-      - 'backend/**'
+      - "backend/**"
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
     paths:
-      - 'backend/**'
+      - "backend/**"
 
 jobs:
   build-and-deploy:
@@ -18,16 +18,16 @@ jobs:
       packages: write
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Build the Docker image
-      run: |
-        docker login --username ${{github.actor}} --password ${{ secrets.GITHUB_TOKEN }} ghcr.io
-        docker build ./backend/ --file ./backend/Dockerfile --platform linux/amd64 --tag ghcr.io/polytechnique-school-work/conuhacks_backend:lastest
-        docker push ghcr.io/polytechnique-school-work/conuhacks_backend:lastest
+      - name: Build the Docker image
+        run: |
+          docker login --username ${{github.actor}} --password ${{ secrets.GITHUB_TOKEN }} ghcr.io
+          docker build ./backend/ --file ./backend/Dockerfile --platform linux/amd64 --tag ghcr.io/polytechnique-school-work/conuhacks_backend:latest
+          docker push ghcr.io/polytechnique-school-work/conuhacks_backend:latest
 
-    - name: Run Tests
-      run: |
-        cd backend
-        cargo test
+      - name: Run Tests
+        run: |
+          cd backend
+          cargo test

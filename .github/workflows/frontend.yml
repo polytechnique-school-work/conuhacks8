@@ -2,13 +2,13 @@ name: Frontend CI/CD
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
     paths:
-      - 'frontend/**'
+      - "frontend/**"
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
     paths:
-      - 'frontend/**'
+      - "frontend/**"
 
 jobs:
   build-and-deploy:
@@ -18,16 +18,16 @@ jobs:
       packages: write
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Build the Docker image
-      run: |
-        docker login --username ${{github.actor}} --password ${{ secrets.GITHUB_TOKEN }} ghcr.io
-        docker build ./frontend/ --file ./frontend/Dockerfile --platform linux/amd64 --tag ghcr.io/polytechnique-school-work/conuhacks_frontend:lastest
-        docker push ghcr.io/polytechnique-school-work/conuhacks_frontend:lastest
+      - name: Build the Docker image
+        run: |
+          docker login --username ${{github.actor}} --password ${{ secrets.GITHUB_TOKEN }} ghcr.io
+          docker build ./frontend/ --file ./frontend/Dockerfile --platform linux/amd64 --tag ghcr.io/polytechnique-school-work/conuhacks_frontend:latest
+          docker push ghcr.io/polytechnique-school-work/conuhacks_frontend:latest
 
-    - name: Run Tests
-      run: |
-        cd backend
-        # TODO: Add tests
+      - name: Run Tests
+        run: |
+          cd backend
+          # TODO: Add tests
