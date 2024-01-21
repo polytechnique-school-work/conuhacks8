@@ -1,6 +1,6 @@
 <template>
   <label for="file-upload" class="upload-button">
-    Upload your CSV File
+    Upload your CSV File <upload-icon />
   </label>
   <input 
     id="file-upload"
@@ -18,7 +18,7 @@
   justify-content: center;
   height: 60px;
   width: 350px;
-  color: map-get($map: $themes, $key: text);
+  color: map-get($map: $themes, $key: text-light);
   background-color: map-get($map: $themes, $key: primary);
   border-radius: 5px;
 }
