@@ -1,3 +1,4 @@
+pub mod algorithm;
 pub mod api_doc;
 pub mod data;
 pub mod route;

@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Default, Serialize, Deserialize, Clone)]
 pub struct Day {
-    slots: [Slot; 10],
+    pub slots: [Slot; 10],
     refused: Vec<Reservation>,
 }
 

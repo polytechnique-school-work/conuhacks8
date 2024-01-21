@@ -4,8 +4,8 @@ use std::array;
 
 #[derive(Default, Debug)]
 pub struct DayPossibility {
-    reservation: Vec<Reservation>,
-    walkin: Vec<Reservation>,
+    pub reservation: Vec<Reservation>,
+    pub walkin: Vec<Reservation>,
 }
 
 pub struct Year {
