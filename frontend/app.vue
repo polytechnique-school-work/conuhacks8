@@ -17,6 +17,11 @@ body {
   background-color: map-get($map: $themes, $key: background);
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .hover {
   &:hover {
     cursor: pointer;

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
+  title: string;
   bigValue: string;
   value: string;
   variation: "increase" | "decrease";
@@ -8,7 +9,7 @@ const props = defineProps<{
 
 <template>
   <div class="wrapper">
-    <Box title="Revenue">
+    <Box :title="title">
       <div class="values">
         <div class="bigvalue">{{ bigValue }}</div>
         <div class="variation" :style="'color: ' + (variation == 'increase' ? '#59985E' : '#F44C3F')">
@@ -33,18 +34,22 @@ const props = defineProps<{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
   width: 100%;
   height: 100%;
 }
 .wrapper {
   width: 350px;
   height: 275px;
-  margin: 20px;
-  gap: 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.variation {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 </style>

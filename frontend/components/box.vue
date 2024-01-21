@@ -21,5 +21,6 @@ const props = defineProps<{
   border-radius: 5px;
   background-color: white;
   padding: 5px;
+  box-sizing: border-box;
 }
 </style>

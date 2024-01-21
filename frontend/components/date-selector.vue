@@ -20,8 +20,6 @@ export default {
 .dateBox {
   width: 350px;
   height: 60px;
-  margin: 20px;
-  gap: 0.5rem;
 
   .info {
     display: flex;

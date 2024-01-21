@@ -1,4 +1,5 @@
 <template>
+  <HeaderComponent />
   <div class="container">
     <Nuxt />
     <div class="wrapper"><slot /></div>
