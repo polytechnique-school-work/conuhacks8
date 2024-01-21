@@ -68,4 +68,4 @@ COPY --from=build /usr/src/app/.nuxt ./.nuxt
 EXPOSE 4242
 
 # Run the application.
-CMD ["npx","serve", "-s", "build","-l", "4242"]
+CMD ["node",".output/server/index.mjs"]
