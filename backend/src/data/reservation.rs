@@ -1,28 +1,26 @@
-use chrono::{Datelike, NaiveDateTime};
+use chrono::NaiveDateTime;
 use serde::{Deserialize, Serialize};
+use std::fmt;
 
-use super::vehicle::VehicleType;
+use super::{time::date::Date, vehicle::VehicleType};
 
-#[derive(Debug, Serialize, Deserialize, Clone)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct Reservation {
-    pub call_date: NaiveDateTime,
-    pub reservation_date: NaiveDateTime,
+    pub call_date: Date,
+    pub reservation_date: Date,
     pub vehicle_type: VehicleType,
 }
 
-impl Reservation {
-    pub fn new(
-        call_date: NaiveDateTime,
-        reservation_date: NaiveDateTime,
-        vehicle_type: VehicleType,
-    ) -> Self {
-        Self {
-            call_date,
-            reservation_date,
-            vehicle_type,
-        }
+impl fmt::Debug for Reservation {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("Reservation")
+            .field("duration", &self.reservation_date.duration)
+            .field("vehicle_type", &self.vehicle_type)
+            .finish()
     }
+}
 
+impl Reservation {
     pub fn new_from_string(line: &str) -> Self {
         let mut split = line.split(',');
         let call_date =
@@ -31,8 +29,8 @@ impl Reservation {
             NaiveDateTime::parse_from_str(split.next().unwrap(), "%Y-%m-%d %H:%M").unwrap();
         let vehicle_type = VehicleType::from_string(split.next().unwrap());
         Self {
-            call_date,
-            reservation_date,
+            call_date: call_date.into(),
+            reservation_date: reservation_date.into(),
             vehicle_type,
         }
     }
@@ -43,10 +41,10 @@ impl Reservation {
             reservation.vehicle_type.get_time(),
         );
         let delta = self.reservation_date - reservation.reservation_date;
-        delta.abs() < reservation_time
+        delta.abs() < *reservation_time
     }
 
     pub fn is_walkin(&self) -> bool {
-        self.call_date.ordinal() == self.reservation_date.ordinal()
+        self.call_date.ordinal == self.reservation_date.ordinal
     }
 }

@@ -1,10 +1,8 @@
-pub mod day;
 pub mod day_info;
 pub mod slot;
 pub mod year;
 
-use crate::{data::reservation::Reservation, data::reservations::Reservations, schedule::day::Day};
-use chrono::Datelike;
+use crate::{algorithm::day::Day, data::reservation::Reservation};
 use std::array;
 
 #[derive(Debug)]
@@ -22,10 +20,10 @@ impl Default for Schedule {
 
 impl Schedule {
     pub fn add_fifo(&mut self, reservation: Reservation) {
-        let day = reservation.reservation_date.ordinal0() as usize;
-        self.days[day].push(reservation);
+        let day = reservation.reservation_date.ordinal as usize;
+        self.days[day].push_walkin(reservation);
     }
-    pub fn add_all_fifo(&mut self, reservations: Reservations) {
+    pub fn add_all_fifo(&mut self, reservations: Vec<Reservation>) {
         for reservation in reservations.into_iter() {
             self.add_fifo(reservation);
         }

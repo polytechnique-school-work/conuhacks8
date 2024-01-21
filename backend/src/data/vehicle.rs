@@ -1,4 +1,4 @@
-use chrono::Duration;
+use super::time::duration::Duration;
 use serde::{Deserialize, Serialize};
 
 #[repr(u8)]

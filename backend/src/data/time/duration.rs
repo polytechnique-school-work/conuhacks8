@@ -1,3 +1,4 @@
+use derive_more::Add;
 use derive_more::Deref;
 use derive_more::DerefMut;
 use derive_more::Sub;
@@ -18,6 +19,7 @@ use serde::Serialize;
     PartialOrd,
     Ord,
     Sub,
+    Add,
 )]
 pub struct Duration(i16);
 

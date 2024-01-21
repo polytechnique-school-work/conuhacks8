@@ -1,4 +1,4 @@
-use crate::data::reservation::Reservation;
+use crate::data::{reservation::Reservation, time::duration::Duration};
 use derive_more::{Deref, DerefMut};
 use serde::{Deserialize, Serialize};
 
@@ -9,7 +9,17 @@ pub struct Slot {
 
 impl Slot {
     pub fn can_accept(&self, reservation: &Reservation) -> bool {
-        self.schedule.iter().all(|r| !r.overlap(reservation))
+        let Some(last) = self.schedule.last() else {
+            return false;
+        };
+        !last.overlap(reservation)
+    }
+
+    pub fn end_time(&self) -> Duration {
+        let Some(last) = self.schedule.last() else {
+            return Duration::hours(7);
+        };
+        last.reservation_date.duration + last.vehicle_type.get_time()
     }
 
     pub fn len_served(&self) -> [usize; 5] {

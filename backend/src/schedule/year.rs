@@ -1,5 +1,4 @@
 use crate::{data::reservation::Reservation, data::reservations::Reservations};
-use chrono::Datelike;
 use std::array;
 
 #[derive(Default, Debug)]
@@ -24,7 +23,7 @@ impl Year {
     pub fn new(reservations: Reservations) -> Self {
         let mut year = Self::default();
         for reservation in reservations.into_iter() {
-            let day_builder = &mut year.year[reservation.reservation_date.ordinal0() as usize];
+            let day_builder = &mut year.year[reservation.reservation_date.ordinal as usize];
             match reservation.is_walkin() {
                 true => day_builder.walkin.push(reservation),
                 false => day_builder.reservation.push(reservation),

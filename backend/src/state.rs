@@ -11,7 +11,6 @@ impl AppState {
     pub fn new() -> AppState {
         let mut schedule = Schedule::default();
         let reservations = Reservations::new_from_file("datafile.csv");
-        schedule.add_all_fifo(reservations);
         let schedule = Arc::new(RwLock::new(schedule));
         AppState { schedule }
     }
