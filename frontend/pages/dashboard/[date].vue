@@ -5,7 +5,7 @@
 const data: {
   [key: string]: {
     revenue: number;
-    "revenue-variation": number;
+    revenue_variation: number;
     revenue_missed: number;
     revenue_missed_variation: number;
     clients_served: number;
@@ -14,7 +14,7 @@ const data: {
 } = {
   "2024-01-01": {
     revenue: 230,
-    "revenue-variation": -15,
+    revenue_variation: -15,
     revenue_missed: 612,
     revenue_missed_variation: 57,
     clients_served: 20,
@@ -25,13 +25,10 @@ const data: {
 export default {
   methods: {
     async changeDate(value: string) {
-      console.log(value);
-      //   window.location.href = `/dashboard/${value}`;
-      console.log(2);
     },
     getData(): {
       revenue: number;
-      "revenue-variation": number;
+      revenue_variation: number;
       revenue_missed: number;
       revenue_missed_variation: number;
       clients_served: number;
@@ -40,7 +37,6 @@ export default {
       return data[this.$route.params.date as string];
     },
     receiveDate(date: string) {
-      console.log(date);
       navigateTo(`/dashboard/${date}`);
     },
   },

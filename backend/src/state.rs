@@ -9,8 +9,8 @@ pub struct AppState {
 
 impl AppState {
     pub fn new() -> AppState {
-        let mut schedule = Schedule::default();
         let reservations = Reservations::new_from_file("datafile.csv");
+        let schedule = Schedule::new(reservations);
         let schedule = Arc::new(RwLock::new(schedule));
         AppState { schedule }
     }
