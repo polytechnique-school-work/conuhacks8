@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <NuxtLink to="/dashboard">
+    <NuxtLink to="/">
       <div class="image"><img src="/img/AutoAdmin.png" alt="" />AutoAdmin</div>
     </NuxtLink>
   </div>

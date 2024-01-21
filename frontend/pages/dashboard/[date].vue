@@ -16,8 +16,6 @@ const route = useRoute();
 const response = await fetch("https://api.gagolino.com/api/day/2022/" + route.params.date);
 const data: Data = await response.json();
 
-
-console.log(data.vehicules_served);
 </script>
 
 <template>
