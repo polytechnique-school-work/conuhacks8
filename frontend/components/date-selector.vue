@@ -1,8 +1,12 @@
-<script lang="js">
+<script lang="ts">
 export default {
   methods: {
+    sendDate(date: string) {
+      defineEmits(["date"])("date", date);
+    },
     onClick() {
-      console.log(this.$refs.date.value);
+      // @ts-ignore
+      sendDate(this.$refs.date.value);
     },
   },
 };
@@ -26,6 +30,17 @@ export default {
     flex-direction: row;
     align-items: center;
     gap: 0.5rem;
+
+    & input {
+      // reset style
+      border: none;
+      outline: none;
+      background: none;
+      // custom style
+      font-size: 1rem;
+      font-family: inherit;
+      // remove calendar
+    }
   }
 
   display: flex;

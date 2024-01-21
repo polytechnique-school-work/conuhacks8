@@ -1,17 +1,19 @@
 <template>
-  <HeaderComponent />
+  <AppHeader />
   <div class="container">
-    <Nuxt />
-    <div class="wrapper"><slot /></div>
+    <!-- <Nuxt /> -->
+    <div class="wrapper">
+      <slot />
+    </div>
   </div>
-  <Footer />
+  <AppFooter />
 </template>
 
 <style scoped lang="scss">
 .container {
   display: flex;
   flex-direction: column;
-  min-height: 100%;
+  flex-grow: 1;
 }
 
 .wrapper {
