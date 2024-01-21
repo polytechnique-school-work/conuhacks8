@@ -13,7 +13,7 @@ type Data = {
 };
 const route = useRoute();
 
-const response = await fetch("http://127.0.0.1:6942/api/day/2022/" + route.params.date);
+const response = await fetch("https://api.gagolino.com/api/day/2022/" + route.params.date);
 const data: Data = await response.json();
 
 
