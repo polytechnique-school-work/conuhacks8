@@ -4,6 +4,7 @@ use derive_more::DerefMut;
 use derive_more::Sub;
 use serde::Deserialize;
 use serde::Serialize;
+use utoipa::ToSchema;
 
 #[derive(
     Clone,
@@ -20,6 +21,7 @@ use serde::Serialize;
     Ord,
     Sub,
     Add,
+    ToSchema,
 )]
 pub struct Duration(i16);
 

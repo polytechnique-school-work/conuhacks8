@@ -31,9 +31,9 @@ pub async fn get_day(
 
 #[utoipa::path(
     get,
-    path = "/ap/reservation/{year}/{ordinal}",
+    path = "/api/reservation/{year}/{ordinal}",
     responses(
-        (status = 200, description = "Get daily info", body = DayInfo),
+        (status = 200, description = "Get daily info", body = Day),
         (status = 404, description = "No info for this day"),
     ),
     params(

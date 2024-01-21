@@ -3,8 +3,11 @@ use std::ops::Sub;
 use super::duration::Duration;
 use chrono::{Datelike, NaiveDateTime, Timelike};
 use serde::{Deserialize, Serialize};
+use utoipa::ToSchema;
 
-#[derive(Clone, Copy, Debug, Default, Serialize, Deserialize, PartialEq, Eq, PartialOrd, Ord)]
+#[derive(
+    ToSchema, Clone, Copy, Debug, Default, Serialize, Deserialize, PartialEq, Eq, PartialOrd, Ord,
+)]
 pub struct Date {
     pub year: u16,
     pub ordinal: u16,

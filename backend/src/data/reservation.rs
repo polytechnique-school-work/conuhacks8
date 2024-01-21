@@ -1,10 +1,11 @@
 use chrono::NaiveDateTime;
 use serde::{Deserialize, Serialize};
 use std::fmt;
+use utoipa::ToSchema;
 
 use super::{time::date::Date, vehicle::VehicleType};
 
-#[derive(Serialize, Deserialize, Clone)]
+#[derive(ToSchema, Serialize, Deserialize, Clone)]
 pub struct Reservation {
     pub call_date: Date,
     pub reservation_date: Date,

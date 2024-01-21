@@ -1,4 +1,4 @@
-use crate::{route::day, route::upload, schedule};
+use crate::{algorithm, route::day, route::upload, schedule};
 use utoipa::OpenApi;
 
 #[derive(OpenApi)]
@@ -12,6 +12,7 @@ use utoipa::OpenApi;
             schemas(
                 schedule::day_info::DayInfo,
                 upload::UploadFile,
+                algorithm::day::Day,
             )
         ),
         tags(

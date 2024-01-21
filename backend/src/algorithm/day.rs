@@ -1,8 +1,9 @@
 use crate::data::reservation::Reservation;
 use crate::schedule::slot::Slot;
 use serde::{Deserialize, Serialize};
+use utoipa::ToSchema;
 
-#[derive(Debug, Default, Serialize, Deserialize, Clone)]
+#[derive(ToSchema, Debug, Default, Serialize, Deserialize, Clone)]
 pub struct Day {
     pub slots: [Slot; 10],
     pub refused: Vec<Reservation>,

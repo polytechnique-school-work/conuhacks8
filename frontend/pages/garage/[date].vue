@@ -20,16 +20,16 @@
     </div>
 
     <div class="timelines">
-      <div class="cartimeline"><CarTimeline /></div>
-      <div class="cartimeline"><CarTimeline /></div>
-      <div class="cartimeline"><CarTimeline /></div>
-      <div class="cartimeline"><CarTimeline /></div>
-      <div class="cartimeline"><CarTimeline /></div>
-      <div class="cartimeline"><CarTimeline /></div>
-      <div class="cartimeline"><CarTimeline /></div>
-      <div class="cartimeline"><CarTimeline /></div>
-      <div class="cartimeline"><CarTimeline /></div>
-      <div class="cartimeline"><CarTimeline /></div>
+      <div class="cartimeline"></div>
+      <div class="cartimeline"></div>
+      <div class="cartimeline"></div>
+      <div class="cartimeline"></div>
+      <div class="cartimeline"></div>
+      <div class="cartimeline"></div>
+      <div class="cartimeline"></div>
+      <div class="cartimeline"></div>
+      <div class="cartimeline"></div>
+      <div class="cartimeline"></div>
     </div>
   </div>
 </template>
