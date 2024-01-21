@@ -10,8 +10,6 @@
     return days;
   }
 
-  console.log(route.params.date);
-
   function dayOfYearToDate(): string {
     const startOfYear = new Date(2022, 0, 0);
     const date = route.params.date as unknown as number;
