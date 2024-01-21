@@ -13,10 +13,9 @@ type Data = {
 };
 const route = useRoute();
 
-const response = await fetch("http://127.0.0.1:6942/api/day/2022/" + route.params.date);
+const response = await fetch("https://api.gagolino.com/api/day/2022/" + route.params.date);
 const data: Data = await response.json();
 
-console.log(data.vehicules_served);
 </script>
 
 <template>
@@ -129,21 +128,24 @@ console.log(data.vehicules_served);
     align-items: center;
     justify-content: center;
     width: 75%;
-    gap: 2rem;
-    // max-width: 1200px;
-    & .displays {
-      display: grid;
-      grid-template-columns: auto auto auto auto auto;
-      gap: 2rem;
-      width: 100%;
-    }
-
-    & .buttons {
-      display: grid;
-      grid-template-columns: auto auto auto auto auto;
-      gap: 2rem;
-      width: 100%;
-    }
+    gap: 2em;
   }
+}
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 1em;
+}
+.box {
+  width: 14em;
+}
+.displays {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1em;
 }
 </style>

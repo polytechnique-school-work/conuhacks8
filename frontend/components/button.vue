@@ -5,13 +5,20 @@ const props = defineProps<{
 </script>
 <template>
   <div class="button hover">
-    <div><slot /></div>
+    <div class="content"><slot /></div>
     <div>{{ title }}</div>
   </div>
 </template>
 
 <style scoped lang="scss">
 @import "../assets/style/constants.scss";
+.content {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
 .button {
   display: flex;
   flex-direction: row;

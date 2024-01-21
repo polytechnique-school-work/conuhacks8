@@ -28,7 +28,7 @@ pub async fn upload(State(mut app): State<AppState>, config: Bytes) -> StatusCod
         if let Ok(data) = data {
             let config = data.content.as_bytes();
             let mut file = fs::File::create("new_datafile.csv").unwrap();
-            if let Err(_) = file.write_all(&config) {
+            if file.write_all(config).is_err() {
                 return StatusCode::INTERNAL_SERVER_ERROR;
             }
         } else {
