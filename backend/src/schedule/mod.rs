@@ -23,7 +23,8 @@ impl Schedule {
         let day = reservation.reservation_date.ordinal as usize;
         self.days[day].push_walkin(reservation);
     }
-    pub fn add_all_fifo(&mut self, reservations: Vec<Reservation>) {
+    pub fn add_all_fifo(&mut self, mut reservations: Vec<Reservation>) {
+        reservations.sort_unstable_by_key(|r| (r.reservation_date, r.call_date));
         for reservation in reservations.into_iter() {
             self.add_fifo(reservation);
         }

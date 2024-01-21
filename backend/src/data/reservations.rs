@@ -3,16 +3,33 @@ use derive_more::{Deref, DerefMut};
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
+use super::reservation;
+use super::time::duration::Duration;
+
 #[derive(Clone, Debug, Default, Deref, DerefMut)]
 pub struct Reservations {
     pub reservations: Vec<Reservation>,
 }
 
 impl Reservations {
-    pub fn new() -> Self {
-        Reservations {
-            reservations: Vec::new(),
+    pub fn new(reservations: Vec<Reservation>) -> Self {
+        Reservations { reservations }
+    }
+
+    pub fn remove_all_before(&mut self, t0: Duration, refused: &mut Vec<Reservation>) {
+        while let Some(reservation) = self.last() {
+            if reservation.reservation_date.duration < t0 {
+                if let Some(reservation) = self.pop() {
+                    refused.push(reservation);
+                }
+            } else {
+                break;
+            }
         }
+    }
+
+    pub fn last_duration(&self) -> Option<Duration> {
+        self.last().map(|r| r.reservation_date.duration)
     }
 
     pub fn new_from_file(filename: &str) -> Self {

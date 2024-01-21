@@ -10,7 +10,7 @@ pub struct Slot {
 impl Slot {
     pub fn can_accept(&self, reservation: &Reservation) -> bool {
         let Some(last) = self.schedule.last() else {
-            return false;
+            return true;
         };
         !last.overlap(reservation)
     }
