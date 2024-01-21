@@ -1,5 +1,5 @@
 use super::slot::Slot;
-use crate::reservation::Reservation;
+use crate::data::reservation::Reservation;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Default, Serialize, Deserialize, Clone)]
@@ -10,10 +10,23 @@ pub struct Day {
 
 impl Day {
     pub fn push(&mut self, reservation: Reservation) {
-        match self.slots.iter_mut().find(|r| r.can_accept(&reservation)) {
-            Some(slot) => slot.push(reservation),
-            None => self.refused.push(reservation),
+        if let Some(slot) = self.slots[0..5]
+            .iter_mut()
+            .find(|r| r.can_accept(&reservation))
+        {
+            slot.push(reservation);
+            return;
         }
+        if reservation.is_walkin() {
+            if let Some(slot) = self.slots[6..10]
+                .iter_mut()
+                .find(|r| r.can_accept(&reservation))
+            {
+                slot.push(reservation);
+                return;
+            }
+        }
+        self.refused.push(reservation);
     }
 
     pub fn get_vehicules_refused(&self) -> [usize; 5] {

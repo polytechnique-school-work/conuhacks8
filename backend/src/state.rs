@@ -1,4 +1,4 @@
-use crate::{reservations::Reservations, schedule::Schedule};
+use crate::{data::reservations::Reservations, schedule::Schedule};
 use std::sync::Arc;
 use tokio::sync::RwLock;
 

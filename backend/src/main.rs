@@ -1,25 +1,18 @@
-use crate::{route::routes::routes, state::AppState};
-use api_doc::ApiDoc;
 use axum::Router;
+use backend::api_doc::ApiDoc;
+use backend::{route::routes::routes, state::AppState};
 use tower::ServiceBuilder;
 use tower_http::trace::TraceLayer;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 use utoipa::OpenApi;
 use utoipa_swagger_ui::SwaggerUi;
 
-pub mod api_doc;
-pub mod reservation;
-pub mod reservations;
-pub mod route;
-pub mod schedule;
-pub mod state;
-
 #[tokio::main]
 async fn main() {
     tracing_subscriber::registry()
         .with(
             tracing_subscriber::EnvFilter::try_from_default_env()
-                .unwrap_or_else(|_| "example_todos=debug,tower_http=debug".into()),
+                .unwrap_or_else(|_| "tower_http=debug".into()),
         )
         .with(tracing_subscriber::fmt::layer())
         .init();

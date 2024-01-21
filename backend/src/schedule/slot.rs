@@ -1,4 +1,4 @@
-use crate::reservation::Reservation;
+use crate::data::reservation::Reservation;
 use derive_more::{Deref, DerefMut};
 use serde::{Deserialize, Serialize};
 

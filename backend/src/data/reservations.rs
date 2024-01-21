@@ -1,9 +1,9 @@
-use crate::reservation::Reservation;
+use crate::data::reservation::Reservation;
 use derive_more::{Deref, DerefMut};
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
-#[derive(Debug, Default, Deref, DerefMut)]
+#[derive(Clone, Debug, Default, Deref, DerefMut)]
 pub struct Reservations {
     pub reservations: Vec<Reservation>,
 }

@@ -1,14 +1,15 @@
 pub mod day;
 pub mod day_info;
 pub mod slot;
+pub mod year;
 
-use crate::{reservation::Reservation, reservations::Reservations, schedule::day::Day};
+use crate::{data::reservation::Reservation, data::reservations::Reservations, schedule::day::Day};
 use chrono::Datelike;
 use std::array;
 
 #[derive(Debug)]
 pub struct Schedule {
-    days: [Day; 365],
+    days: [Day; 366],
 }
 
 impl Default for Schedule {
